@@ -14,8 +14,8 @@ body{
 
 section {
     display: grid;
-    grid-template-columns: repeat(3,10vmin);
-    grid-template-rows: repeat(3,10vmin);
+    grid-template-columns: repeat(3,25vmin);
+    grid-template-rows: repeat(3,25vmin);
     justify-content: center;
     
 }
