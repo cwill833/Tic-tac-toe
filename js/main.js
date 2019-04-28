@@ -23,20 +23,13 @@ init();
 
 function handleClick (evt){
     const marker = evt.target;
-    console.log(evt)
     const colIdx = parseInt(marker.id.slice(1,2));
     const rowIdx = parseInt(marker.id.slice(3));
     if(board[colIdx][rowIdx]) return;
     board[colIdx][rowIdx] = turn;
-    console.log(colIdx);
-    console.log(rowIdx);
     turn *= -1;
     render();
 }
-
-
-
-
 
 function render(){
     //display the board
@@ -63,3 +56,4 @@ function init (){
 function myButton(){
     location.reload();
 };
+
