@@ -1,8 +1,8 @@
 /*---- constants ----*/ 
 const PLAYERS = {
-    '1': 'Images/Giottos-O.jpg',
-    '-1': 'Images/Red-painted-X-300x250.jpg',
-    '0': 'Images/red-click-here-button.gif'
+    '1': 'X',
+    '-1': 'O',
+    '0': null,
 };
 
 /*----- app's state (variables) -----*/
@@ -23,49 +23,31 @@ init();
 
 function handleClick (evt){
     const marker = evt.target;
-    const colIdx = parseInt(marker.id.replace('col', ''));
-    if (isNaN(colIdx)) return;
-    const rowIdx = board[colIdx].indexOf(0);
-    if(rowIdx === -1) return;
+    console.log(evt)
+    const colIdx = parseInt(marker.id.slice(1,2));
+    const rowIdx = parseInt(marker.id.slice(3));
+    if(board[colIdx][rowIdx]) return;
     board[colIdx][rowIdx] = turn;
-    winner = getWinner();
+    console.log(colIdx);
+    console.log(rowIdx);
     turn *= -1;
     render();
 }
 
-function checkCol(colIdx){
-    return null;
-}
 
-function getWinner(){
-    let winner = null;
-    for(let colIdx = 0; colIdx < board.length; colIdx++){
-        winner = checkCol(colIdx);
-        if(winner) break;
-    }
-    return winner;
-}
+
+
 
 function render(){
     //display the board
     board.forEach((colARR, colIDX)=> {
         // access the correct div in the section
         colARR.forEach((cell,rowIDX) => {
-            const div = document.getElementById(`c${colIDX}r${rowIDX}`);
-            div.style.backgroundImage = url('PLAYERS[cell]');
+            const div = document.getElementById(`c${colIDX}r${rowIDX}`)
+            div.textContent= PLAYERS[cell]
         });
     });
-
-    if (winner) {
-        if (winner === 'T'){
-            msgChange.textContent = "It's a Tie!"
-        } else {
-
-        }
-    } else {
-        msgChange.textContent = `${PLAYERS[turn]}'s Turn`;
-
-    }
+    msgChange.textContent = `${PLAYERS[turn]}'s Turn`;
 };
 
 function init (){
@@ -74,7 +56,10 @@ function init (){
         [0,0,0],
         [0,0,0]
     ];
-    winner = null;
     turn = 1;
     render();
 }
+
+function myButton(){
+    location.reload();
+};
